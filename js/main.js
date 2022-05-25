@@ -46,7 +46,7 @@ const app = new Vue({
                         if (item.quantity > 1) {
                             item.quantity--;
                         } else {
-                            this.cartItems.splice(this.cartItems.indexOf(item), 1)
+                            this.allProducts.splice(this.allProducts.indexOf(item), 1)
                         }
                     }
                 })

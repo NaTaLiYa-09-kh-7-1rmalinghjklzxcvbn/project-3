@@ -1,36 +1,97 @@
-const products = [
-  { id: 1, title: 'Notebook', price: 1000 },
-  { id: 2, title: 'Mouse', price: 100 },
-  { id: 3, title: 'Keyboard', price: 250 },
-  { id: 4, title: 'Gamepad', price: 150 },
-];
+const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
-const getProductHTMLString = (title, price, images) =>
-  `<div class="product-item">
-                <h3>${title}</h3>
-                <p>${price} p.</p>
-                <img class = "product-img" src = ${images =
-  'https://st2.depositphotos.com/4641393/9871/i/600/' +
-  'depositphotos_98718182-stock-photo-soft-colored-abstract-background-for.jpg\
-                   width = 50%'} alt = >
-                 <button class="by-btn">Добавить</button>
-              </div>`;
+const app = new Vue({
+    el: '#app',
+    data: {
+        catalogUrl: '/catalogData.json',
+        products: [],
+        imgCatalog: 'https://via.placeholder.com/200x150',
+        allProducts: [],
+        basketUrl: '/getBasket.json',
+        userSearch: '',
+        showCart: false,
+        imgCart: 'https://via.placeholder.com/50x100',
+        filtered: []
+    },
+
+    methods: {
+
+        getJson(url) {
+            return fetch(url)
+                .then(result => result.json())
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        addProduct(product) {
+            this.getJson(`${API}/addToBasket.json`)
+                .then(data => {
+                    if (data.result === 1) {
+                        let find = this.allProducts.find(el => el.id_product === product.id_product);
+                        if (find) {
+                            find.quantity++;
+                        } else {
+                            let prod = Object.assign({ quantity: 1 }, product);
+                            this.allProducts.push(prod)
+                        }
+                    } else {
+                        alert('Error');
+                    }
+                })
+        },
+        remove(item) {
+            this.getJson(`${API}/deleteFromBasket.json`)
+                .then(data => {
+                    if (data.result === 1) {
+                        if (item.quantity > 1) {
+                            item.quantity--;
+                        } else {
+                            this.allProducts.splice(this.allProducts.indexOf(item), 1)
+                        }
+                    }
+                })
+        },
+        filter() {
+            let regexp = new RegExp(this.userSearch, 'i');
+            this.filtered = this.products.filter(el => regexp.test(el.product_name));
+        },
+    },
+
+    beforeCreate() {
+        console.log('beforeCreate');
+    },
+    created() {
 
 
-const renderProducts = productList => {
-  const list = productList.map((good) => getProductHTMLString(good.title, good.price));
-
-  document.querySelector('.products').innerHTML = list.join('');
-  // console.log(list);
-
-};
-//Почему через метод 'reduce' первый продукт выводится objekt Objekt
-/*const renderProducts = (productList) => {
-  const list = productList.reduce((acc, good) => acc + getProductHTMLString(good.title, good.price));
-  document.querySelector('.products').innerHTML = list;
-  console.log(list);
-}*/
-
-
-renderProducts(products);
+    },
+    beforeMount() {
+        console.log('beforeMount');
+    },
+    mounted() {
+        this.getJson(`${API}` + this.basketUrl)
+            .then(data => {
+                for (let el of data.contents) {
+                    this.allProducts.push(el);
+                }
+            });
+        this.getJson(`${API + this.catalogUrl}`)
+            .then(data => {
+                for (let el of data) {
+                    this.products.push(el);
+                }
+            });
+    },
+    beforeUpdate() {
+        console.log('beforeUpdate');
+    },
+    updated() {
+        console.log('updated');
+    },
+    beforeDestroy() {
+        console.log('beforeDestroy');
+    },
+    destroyed() {
+        console.log('destroyed');
+    },
+});
 

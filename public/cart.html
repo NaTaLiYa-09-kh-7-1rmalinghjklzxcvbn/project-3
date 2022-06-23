@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет-магазин</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d40bf12c02.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="wrapper" id="app">
+        <div class="top">
+            <header-el ref="headerEl"></header-el>
+        </div>
+            <div class="header-under">
+                <div class="container">
+                    <div class="content">
+                        <div class="header-tx">SHOPPING CART </div>
+                        <div class="path-non">
+                            <a class="path-1 pa" href="index.html">HOME<span>/</span> </a>
+                            <a class="path-2 pa  pa-c-NA" href="catalog.html">MEN<span>/</span> </a>
+                            <a class="path-3 pa pa-c-NA" href="product.html">NEW ARRIVALS<span>/</span> </a>
+                            <a class="path-3 pa pa-c-M" href="#">SHOPPING CART</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="cart-center">
+                    <section class="cart-center-left">
+                        <div class="cart-left-1">
+                            <check ref="check"></check>
+                            <div class="cart-left-und">
+                                <a href="#">
+                                    <button class="und">CLEAR SHOPPING CART</button>
+                                </a>
+                                <a href="#">
+                                    <button class="und">CONTINUE SHOPPING</button>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="cart-center-right">
+                        <div class="cart-form">
+                            <form action="#">
+                                <h4 class="input-top">SHIPPING ADRESS</h4>
+                                <input class="inp-cart" type="text" placeholder="Bangladesh"><br>
+                                <input class="inp-cart" type="text" placeholder="State"><br>
+                                <input class="inp-cart" type="text" placeholder="Postcode / Zip"><br>
+                                <input class="inp-cart in-c-end" type="text" placeholder="GET A QUOTE">
+                            </form>
+                        </div>
+                        <div class="price-cart">
+                            <h4 class=tx-4>SUB TOTAL $900</h4>
+                            <h2 class=tx-2>GRAND TOTAL $900</h2>
+                            <div class="line-cr"></div>
+                            <a href="#">
+                                <button class="button-cart">PROCEED TO CHECKOUT</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer-comp></footer-comp>
+        </div>
+    </div>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.4/dist/vue-router.min.js"></script>
+    <script src="js/ProdComp.js"></script>
+    <script src="js/CartComp.js"></script>
+    <script src="js/FilterComp.js"></script>
+    <script src="js/CheckComp.js"></script>
+    <script src="js/FooterComp.js"></script>
+    <script src="js/HeaderComp.js"></script>
+    <script src="https://kit.fontawesome.com/d40bf12c02.js" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script> 
+</body>
+
+</html>

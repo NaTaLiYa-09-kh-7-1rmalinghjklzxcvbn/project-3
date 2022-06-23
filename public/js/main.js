@@ -1,7 +1,11 @@
-const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+
+const router = new VueRouter({
+    mode: 'history',
+})
 
 const app = new Vue({
     el: '#app',
+    router: router,
     data: {
         userSearch: '',
     },
@@ -54,4 +58,3 @@ const app = new Vue({
         console.log(this);
     }
 });
-

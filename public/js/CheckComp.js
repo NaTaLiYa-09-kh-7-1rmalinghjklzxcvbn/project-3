@@ -1,20 +1,19 @@
-Vue.component('cart', {
+Vue.component('check', {
     data() {
         return {
             cartItems: [],
-            showCart: false,
-            crUrl: '../cart.html'
+            htmlUrl: '../index.html'
         }
     },
     methods: {
         addProduct(product) {
             let find = this.cartItems.find(el => el.id_product === product.id_product);
             if (find) {
-                this.$root.putJson(`/api/cart/${find.id_product}`, { quantity: 1 });
+                this.$parent.putJson(`/api/cart/${find.id_product}`, { quantity: 1 });
                 find.quantity++;
             } else {
                 let prod = Object.assign({ quantity: 1 }, product);
-                this.$root.postJson('/api/cart', prod)
+                this.$parent.postJson('/api/cart', prod)
                     .then(data => {
                         if (data.result === 1) {
                             this.cartItems.push(prod);
@@ -24,14 +23,14 @@ Vue.component('cart', {
         },
         remove(item) {
             if (item.quantity > 1) {
-                this.$root.putJson(`/api/cart/${item.id_product}`, { quantity: -1 })
+                this.$parent.putJson(`/api/cart/${item.id_product}`, { quantity: -1 })
                     .then(data => {
                         if (data.result === 1) {
                             item.quantity--;
                         }
                     });
             } else {
-                this.$root.deleteJson(`/api/cart/${item.id_product}`)
+                this.$parent.deleteJson(`/api/cart/${item.id_product}`)
                     .then(data => {
                         if (data.result === 1) {
                             this.cartItems.splice(this.cartItems.indexOf(item), 1)
@@ -42,7 +41,7 @@ Vue.component('cart', {
         }
     },
     computed: {
-        cartTotalSum(item) {
+        cartTotalSum() {
             let result = [];
             if (this.cartItems.length) {
                 for (let item of this.cartItems) {
@@ -59,37 +58,27 @@ Vue.component('cart', {
     },
 
     mounted() {
-        this.$root.getJson('/api/cart')
-            .then(data => {
-                for (let el of data.contents) {
-                    this.cartItems.push(el);
-                }
-            });
+        this.cartItems = this.$root.$refs.headerEl.$refs.cart.cartItems
     },
 
-
     template: `
-        <div>
-            <button class="btn-cart fa-solid fa-cart-shopping" type="button" @click="showCart = !showCart"></button>
-            <div class="cart-block" v-show="showCart">
-                <p v-if="!cartItems.length">Корзина пуста</p>
-                <a class="cartCheckout"v-if="cartItems.length" v-bind:href="crUrl">Перейти к оформлению</a>
-                <cart-item class="cart-item" 
+        <div>  
+                <check-item class="cart-item" 
                 v-for="item of cartItems" 
                 :key="item.id_product"
                 :cart-item="item" 
                 @remove="remove">
-                </cart-item>
+                </check-item>
                 <div class="cartItems_total">
-                <p>Сумма товаров в корзине:</p>
-                <p class="cartSum">{{cartTotalSum}}</p>
+                <p v-if="cartItems.length">Товаров на сумму:</p>
+                <a v-else class="cartCheckout" v-bind:href="htmlUrl">Выбрать товар</a>
+                <p v-if="cartItems.length" class="cartSum">{{cartTotalSum}}</p>
               
                 </div>
-            </div>
         </div>`
 });
 
-Vue.component('cart-item', {
+Vue.component('check-item', {
     props: ['cartItem'],
     template: `
                 <div class="cart-item">
@@ -103,7 +92,7 @@ Vue.component('cart-item', {
                 </div>
                 <div class="right-block">
                     <p class="product-price">{{cartItem.quantity*cartItem.price}}₽</p>
-                    <button class="del-btn" @click="$emit('remove', cartItem)">&times;</button>
+                    <button class="del-btn"  @click="$emit('remove', cartItem)">&times;</button>
                 </div>
             </div>
     `

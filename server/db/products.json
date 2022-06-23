@@ -1,22 +1,47 @@
 [
-  {
-    "id_product": 124,
-    "product_name": "Keyboard",
-    "price": 1600
-  },
-  {
-    "id_product": 457,
-    "product_name": "Gamepad",
-    "price": 3000
-  },
-  {
-    "id_product": 123,
-    "product_name": "Ноутбук",
-    "price": 45600
-  },
-  {
-    "id_product": 456,
-    "product_name": "Мышка",
-    "price": 1000
-  }
+    {
+        "id_product": 1,
+        "product_name": "Куртка мужская",
+        "price": 1600,
+        "img": "img/boy1.svg",
+        "description": "Демисезонная стеганная куртка",
+        "prod_select": "m"
+    },
+    {
+        "id_product": 2,
+        "product_name": "Женский костюм",
+        "price": 1400,
+        "img": "img/dama1.svg",
+        "description": "Стильный деловой костюм"
+    },
+    {
+        "id_product": 3,
+        "product_name": "Джемпер",
+        "price": 900,
+        "img": "img/boy2.svg",
+        "description": "Джемпер из натуральной шерсти",
+        "prod_select": "m"
+    },
+    {
+        "id_product": 4,
+        "product_name": "Брюки",
+        "price": 1000,
+        "img": "img/boy3.svg",
+        "description": "Летние мужские брюки",
+        "prod_select": "m"
+    },
+    {
+        "id_product": 5,
+        "product_name": "Женский пиджак",
+        "price": 1600,
+        "img": "img/dama2.svg",
+        "description": "Женский пиджак делового стиля"
+    },
+    {
+        "id_product": 6,
+        "product_name": "Женская блуза",
+        "price": 800,
+        "img": "img/dama3.svg",
+        "description": "Легкая летняя блуза"
+    }
 ]

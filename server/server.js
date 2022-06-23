@@ -8,6 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use('/', express.static('./public'));
+app.use('/cart', express.static('./public/cart.html'));
 
 app.get('/api/products', (req, res) => {
     fs.readFile(productsDBPath, 'utf-8', (err, data) => {
@@ -23,11 +24,26 @@ app.get('/api/cart', (req, res) => {
     });
 });
 
+app.get('/api/products/:id', (req, res) => {
+    fs.readFile(productsDBPath, 'utf-8', (err, data) => {
+        if (err) res.send(err);
+        else {
+            let products = JSON.parse(data)
+            res.send(
+                JSON.stringify(
+                    products.filter((product) => product.id_product === +req.params.id)[0]
+                )
+            );
+        }
+    });
+});
+
+
+
 app.post('/api/cart', (req, res) => {
     fs.readFile(cartDBPath, 'utf-8', (err, data) => {
         if (err) res.send(err);
         else {
-            // console.log(req.body);
             const cartData = JSON.parse(data);
             cartData.contents.push(req.body);
 
@@ -43,7 +59,6 @@ app.put('/api/cart/:id', (req, res) => {
     fs.readFile(cartDBPath, 'utf-8', (err, data) => {
         if (err) res.send(err);
         else {
-            console.log(req.body);
             const cartData = JSON.parse(data);
             const find = cartData.contents.find((good) => {
                 return good.id_product === +req.params.id
@@ -62,14 +77,13 @@ app.delete('/api/cart/:id', (req, res) => {
     fs.readFile(cartDBPath, 'utf-8', (err, data) => {
         if (err) res.send(err);
         else {
-            //console.log(req.body);
+            console.log(req.body);
             const cartData = JSON.parse(data);
             const find = cartData.contents.find((good) => {
                 return good.id_product === +req.params.id
             });
-            cartData.contents.splise(cartData.contents.indexOf(find), 1);
-
-            //find.quantity += req.body.quantity;
+            console.log(cartData.contents);
+            cartData.contents.splice(cartData.contents.indexOf(find), 1);
 
             fs.writeFile(cartDBPath, JSON.stringify(cartData), 'utf-8', (err) => {
                 if (err) res.send(err);
@@ -79,12 +93,6 @@ app.delete('/api/cart/:id', (req, res) => {
     });
 });
 
-app.listen(5555, () => {
+app.listen(8082, () => {
     console.log('Server started!');
 });
-
-// [{
-//     date: ...,
-//     title: ...,
-//     action: ...,
-// }, ...]

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет-магазин</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+   
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper" id="app">
+        <div class="top">
+            <header-el ref="headerEl"></header-el>
+        </div> 
+            <div class="top_info">
+
+                <div class="top_info_up container">
+                    <img class="man-1" src="img/man-1.svg" alt="man-1">
+                    <div class="text tx-adopt">
+
+                        <div class="top_text stick tx-adopt">
+                            THE BRAND<br>
+                            <div class="top_text1">OF LUXERIOUS<span class="tx-span">FASHION</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section container">
+                <div class="center center-adopt">
+                    <a class="sect-hov s-h-1" href="#"> <img class="cart-center-in" src="img/women.svg" alt="women"></a>
+                    <a class="sect-hov s-h" href="#"> <img class="cart-center-in" src="img/man-2.svg" alt="man"></a>
+                    <a class="sect-hov" href="#"><img class="cart-center-in" src="img/kids.svg" alt="kids"></a>
+                </div>
+                <div class="accesuar"> <a href="#"><img class="sect-hov-acces" src="img/accesuar.svg" alt="accesuar">
+                        <p class="text-adopt">LUXIROUS & TRENDY<br><span class="ad"> ACCESORIES</span></p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="section_all">
+                <div class=" container">
+                    <div class="blok-center">
+                        <h1 class="bl-centr-hed">Fetured Items</h1>
+                        <p class="bl-center-tx">Shop for items based on what we featured in this week</p>
+                    </div>
+                    <products ref="products"></products>
+            </div>
+
+            <footer-comp></footer-comp>
+       
+        </div>
+    </div>
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.4/dist/vue-router.min.js"></script>
+    <script src="js/ProdComp.js"></script>
+    <script src="js/CartComp.js"></script>
+    <script src="js/FilterComp.js"></script>
+    <script src="js/FooterComp.js"></script>
+    <script src="js/HeaderComp.js"></script>
+    <script src="https://kit.fontawesome.com/d40bf12c02.js" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script> 
+</body>
+
+</html>
